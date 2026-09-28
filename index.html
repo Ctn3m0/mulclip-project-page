@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f4f1e9" />
+  <meta name="description" content="MulCLIP — a multi-level alignment framework for fine-grained long-context CLIP." />
+  <title>MulCLIP · NeurIPS 2026</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='32' fill='%23171914'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-size='36' font-family='Georgia' font-style='italic' fill='%23f3f0e7'%3EM%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="theme.css" />
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="brand" href="#top"><span class="brand-mark">M</span><span data-short-title>MulCLIP</span></a>
+    <nav aria-label="Primary navigation">
+      <a href="#method">Method</a><a href="#results">Results</a><a href="#analysis">Analysis</a><a href="#citation">Citation</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="top">
+      <div class="hero-orbit orbit-one"></div><div class="hero-orbit orbit-two"></div>
+      <div class="eyebrow"><span class="preview-dot"></span><span data-status></span><span class="slash">/</span><span data-venue></span></div>
+      <h1><span class="accent">Multi-level alignment</span><br>for fine-grained,<br>long-context CLIP.</h1>
+      <p class="full-title" data-title></p>
+      <div class="people"><div class="authors" data-authors></div><div class="affiliations" data-affiliations></div></div>
+      <div class="link-row" data-links></div>
+      <div class="hero-note"><span>TL;DR</span><p data-tldr></p></div>
+      <a class="scroll-cue" href="#overview" aria-label="Scroll to overview"><span></span>Explore</a>
+    </section>
+
+    <section class="section overview" id="overview">
+      <div class="section-kicker">01 / Overview</div>
+      <div class="section-grid"><h2>From one coarse match<br>to <em>three</em> precise ones.</h2><p class="lead" data-abstract></p></div>
+      <div class="claims" data-claims></div>
+    </section>
+
+    <section class="section method" id="method">
+      <div class="section-kicker light">02 / Method</div>
+      <div class="section-grid light"><h2>Match the signal<br>to the <em>scale.</em></h2><p class="lead">Long descriptions mix entities, attributes, relations, and broader facts. MulCLIP gives each granularity an objective designed for the structure it needs to learn.</p></div>
+      <div class="levels" data-levels></div>
+      <div class="total-loss"><span>Unified objective</span><code>ℒ<sub>total</sub> = ℒ<sub>global</sub> + λ<sub>W</sub>ℒ<sub>Word</sub> + λ<sub>S</sub>ℒ<sub>Sub</sub></code><small>λ<sub>W</sub> = λ<sub>S</sub> = 1</small></div>
+      <figure class="paper-figure"><div class="figure-frame"><img src="public/assets/mulclip-pipeline.webp" alt="MulCLIP architecture showing global alignment, token calibration, WPR and SAP objectives" /></div><figcaption><span>Fig. 1</span><p>MulCLIP aligns the same image–text pair at caption, word, and subcaption levels with compatible objectives.</p></figcaption></figure>
+    </section>
+
+    <section class="section results" id="results">
+      <div class="section-kicker">03 / Results</div>
+      <div class="section-grid"><h2>Better detail.<br>Strong <em>transfer.</em></h2><p class="lead">MulCLIP improves long-caption retrieval across DOCCI, DCI, and Urban-1K, while preserving the short-text and classification behavior that makes CLIP useful.</p></div>
+      <div class="result-highlights" data-highlights></div>
+      <div class="results-panels">
+        <article class="data-card"><div class="card-head"><div><span class="mini-label">Ablation · R@1</span><h3>Long-caption understanding</h3></div><span class="chip">ViT-B/16</span></div><div class="bar-chart" data-long-chart></div><p class="card-note">Values average text→image and image→text R@1. The complete model achieves the strongest overall average.</p></article>
+        <article class="data-card"><div class="card-head"><div><span class="mini-label">Zero-shot · Top-1</span><h3>Classification after adaptation</h3></div><span class="chip">DOCCI FT</span></div><div class="compare-chart" data-classification></div><div class="legend"><span><i class="goal"></i>GOAL</span><span><i class="ours"></i>MulCLIP</span></div></article>
+      </div>
+    </section>
+
+    <section class="section analysis" id="analysis">
+      <div class="section-kicker">04 / What the model sees</div>
+      <div class="section-grid"><h2>Attention that lands<br>on the <em>right detail.</em></h2><p class="lead">Query-conditioned maps show more concentrated activation on the fine-grained visual evidence described in text. Red circles mark the regions where localization improves.</p></div>
+      <figure class="wide-figure"><img src="public/assets/attention-localization.webp" alt="Qualitative attention-map comparison across GOAL, ablations and MulCLIP" loading="lazy" /><figcaption><span>Fig. 2 · Qualitative localization</span><p>Original image, heatmap, and overlay are shown for each query and model variant.</p></figcaption></figure>
+      <div class="insight-grid"><article><span>Key ablation</span><h3>Objectives must cooperate.</h3><p>Replacing WPR’s within-sample reconstruction with batch-wise CLIM drops long-caption average R@1 from <strong>76.67</strong> to <strong>71.60</strong>. More supervision is not automatically better when objectives compete in the same token space.</p></article><figure><img src="public/assets/ablation-designs.webp" alt="Visual comparison of MulCLIP ablation objectives" loading="lazy" /><figcaption>Core objective variants used in the ablation.</figcaption></figure></div>
+    </section>
+
+    <section class="section citation" id="citation">
+      <div class="section-kicker light">05 / Citation</div>
+      <div class="section-grid light"><h2>Build on<br><em>MulCLIP.</em></h2><p class="lead">The camera-ready paper, code, models, and citation will be released here. This preview contains no anonymous submission material.</p></div>
+      <div class="citation-box"><div><span>BibTeX</span><button type="button" data-copy disabled>Copy</button></div><pre><code data-bibtex></code></pre></div>
+    </section>
+  </main>
+  <footer><a class="brand footer-brand" href="#top"><span class="brand-mark">M</span><span data-short-title>MulCLIP</span></a><p><span data-venue></span> · Project page preview</p><a href="#top">Back to top ↑</a></footer>
+</body>
+</html>

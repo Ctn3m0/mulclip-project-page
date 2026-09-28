@@ -1,0 +1,9 @@
+# Internal paper source: do not upload
+references/*.pdf
+references/
+
+# Local tools
+node_modules/
+playwright-report/
+test-results/
+.DS_Store
